@@ -42,7 +42,7 @@ class ProductService{
     public function getAll(){
         return $this->product_repo->getAll();
     }
-    
+
     /**
      * Get all products with all languages.
      *
@@ -85,20 +85,20 @@ class ProductService{
 
         if(isset($datas['image'])){
             $path = $this->file_upload_serv->uploadImage($datas['image'],'images/product');
-            dd($path);
+            $product->img_path = $path;
         }
-        
+
         $product->save();
 
         // Storing product data for each language
         $localeMappings = config('app.languages');
-        
+
         foreach($localeMappings as $langName => $langId){
             $data = $datas[$langName];
             $product->languages()->attach([
                 [
-                    'name' => $data['name'], 
-                    'description' => $data['description'], 
+                    'name' => $data['name'],
+                    'description' => $data['description'],
                     'language_id'=>$langId
                 ]
             ]);
@@ -118,10 +118,80 @@ class ProductService{
                 $product->sizes()->attach([
                     [
                         'size_id' => $sizeId,
-                        'price' => $sizePrice 
+                        'price' => $sizePrice
                     ]
                 ]);
             }
         }
+
+        return $product;
+    }
+
+    public function update(int $product_id,$datas){
+        $product = $this->product_repo->getById($product_id);
+
+        if(isset($datas['price'])){
+            $product->price = $datas['price'];
+        }
+
+        if(isset($datas['category'])){
+            $product->category_id = $datas['category'];
+        }
+
+        if(isset($datas['image'])){
+            if($product->img_path){
+                $path = $this->file_upload_serv->deleteImage($product->img_path);
+            }
+            $path = $this->file_upload_serv->uploadImage($datas['image'],'images/product');
+            $product->img_path = $path;
+        }
+
+        $product->save();
+
+        // Storing product data for each language
+        $localeMappings = config('app.languages');
+        $product->languages()->detach();
+        foreach($localeMappings as $langName => $langId){
+            $data = $datas[$langName];
+            $product->languages()->attach([
+                [
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'language_id'=>$langId
+                ]
+            ]);
+        }
+
+        // Attaching ingredients if provided
+        if(isset($datas['ingredients'])){
+            $product->ingredients()->detach();
+            $product->ingredients()->attach($datas['ingredients']);
+        }
+
+        // Attaching sizes if provided
+        if(isset($datas['sizes'])){
+            $product->sizes()->detach();
+            $sizes = $this->size_repo->getSorted();
+
+            foreach($datas['sizes'] as $sizeName => $sizePrice){
+                $sizeId = $sizes[$sizeName];
+                $product->sizes()->attach([
+                    [
+                        'size_id' => $sizeId,
+                        'price' => $sizePrice
+                    ]
+                ]);
+            }
+        }
+
+        return $product;
+    }
+
+    public function getById(int $product_id){
+        return $this->product_repo->getById($product_id);
+    }
+
+    public function destroy(int $product_id){
+       return $this->product_repo->destroy($product_id);
     }
 }

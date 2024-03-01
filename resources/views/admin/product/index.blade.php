@@ -51,9 +51,9 @@
                     <a class="btn"  href="{{ route('admin.product.edit', ['id' => $data['id']]) }}" title="{{ __('main.Edit') }}">
                         <i class="fas fa-edit text-warning"></i>
                     </a>
-                    <a class="btn"  href="{{ route('admin.product.show', ['id' => $data['id']]) }}" title="{{ __('main.Show') }}">
+                    {{-- <a class="btn"  href="{{ route('admin.product.show', ['id' => $data['id']]) }}" title="{{ __('main.Show') }}">
                         <i class="fas fa-eye text-primary"></i>
-                    </a>
+                    </a> --}}
                 </div>
             </td>
 

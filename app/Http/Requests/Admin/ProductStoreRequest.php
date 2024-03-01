@@ -44,7 +44,7 @@ class ProductStoreRequest extends FormRequest
             $validateArr[$lang->name . '.name'] = 'required|string|max:250';
             $validateArr[$lang->name . '.description'] = 'nullable|string|max:250';
         }
-        
+
         return $validateArr;
     }
 
@@ -53,7 +53,7 @@ class ProductStoreRequest extends FormRequest
         if (!$this->input('sizes')) {
             return 'required|numeric|not_in:0';
         } else {
-            return 'nullable'; 
+            return 'nullable';
         }
     }
 
@@ -62,16 +62,16 @@ class ProductStoreRequest extends FormRequest
         if ($this->input('sizes')) {
             return 'required|numeric';
         } else {
-            return 'nullable'; 
+            return 'nullable';
         }
     }
-    
+
     public function ingredientRule()
     {
         if ($this->input('ingredients')) {
             return 'required|numeric';
         } else {
-            return 'nullable'; 
+            return 'nullable';
         }
     }
 

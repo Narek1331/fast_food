@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\SizeService;
-use App\Http\Requests\StoreOrUpdateSizeRequest;
+use App\Http\Requests\Admin\StoreOrUpdateSizeRequest;
 
 class SizeController extends Controller
 {

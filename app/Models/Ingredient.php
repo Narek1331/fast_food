@@ -9,6 +9,13 @@ class Ingredient extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public function languages()
+    {
+        return $this->morphToMany(Language::class, 'languageable');
+    }
+
     public function translate()
     {
         return $this->morphOne(Languageable::class, 'languageable');
@@ -16,6 +23,8 @@ class Ingredient extends Model
 
     public function getNameAttribute()
     {
-        return $this->translate->name;
+
+        $this->translate->name;
+
     }
 }

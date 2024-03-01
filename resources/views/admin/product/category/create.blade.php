@@ -14,9 +14,24 @@
             {{ __('main.Create new category') }}
         </h3>
     </div>
-    <form action="{{ route('admin.product.category.store') }}" method="POST">
+    <form action="{{ route('admin.product.category.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
+            <div class="form-group text-center">
+                <img src="" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;" id="previewImg">
+            </div>
+            <div class="form-group">
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="image">
+                    <label  class="custom-file-label" for="customFile">{{__('main.Choose image')}}</label>
+                    @error('image')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
             @foreach ($languages as $lang)
 
             <div class="form-group">
@@ -46,5 +61,18 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        document.getElementById('customFile').addEventListener('change', function(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var previewImage = document.getElementById('previewImg');
+            previewImage.src = dataURL;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    });
+    </script>
 @stop

@@ -30,7 +30,6 @@ class ProductController extends Controller
     public function index(){
         $products = $this->product_serv->getWithAllLanguages();
         $languages = $this->language_serv->getAll();
-        // dd($products);
         return view('admin.product.index',['languages'=>$languages,'products'=>$products]);
     }
 
@@ -38,8 +37,19 @@ class ProductController extends Controller
         return view('admin.product.show');
     }
 
-    public function edit(){
-        return view('admin.product.edit');
+    public function edit(int $id){
+        $product =  $this->product_serv->getById($id);
+        $languages = $this->language_serv->getAll();
+        $categories = $this->category_serv->getAll();
+        $ingredients = $this->ingredient_serv->getAll();
+        $sizes = $this->size_serv->getAll();
+        return view('admin.product.edit',[
+            'languages' => $languages,
+            'categories' => $categories,
+            'ingredients' => $ingredients,
+            'sizes' => $sizes,
+            'product' => $product,
+        ]);
     }
 
     public function create(){
@@ -48,7 +58,6 @@ class ProductController extends Controller
         $ingredients = $this->ingredient_serv->getAll();
         $sizes = $this->size_serv->getAll();
 
-        // dd($categories);
         return view('admin.product.create',[
             'languages' => $languages,
             'categories' => $categories,
@@ -58,8 +67,19 @@ class ProductController extends Controller
     }
 
     public function store(ProductStoreRequest $request){
-        // dd($request->all());
         $product = $this->product_serv->store($request->validated());
+        return redirect()->route('admin.product');
+    }
+
+    public function update(int $id, ProductStoreRequest $request){
+        $product = $this->product_serv->update($id,$request->validated());
+
+        return redirect()->route('admin.product');
+    }
+
+    public function destroy(int $id){
+        $product = $this->product_serv->destroy($id);
+
         return redirect()->route('admin.product');
     }
 }

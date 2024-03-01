@@ -41,4 +41,8 @@ return [
     'Create new size' => 'Ստեղծեք նոր չափս',
     'id' => 'id',
     'ID' => 'ID',
+    'List Ingredients' => 'Բաղադրիչների ցանկ',
+    'Create new ingredient' => 'Ստեղծեք նոր բաղադրիչ',
+    'Edit ingredient' => 'Խմբագրել բաղադրիչը',
+    'Edit product' => 'Խմբագրել ապրանքը',
 ];

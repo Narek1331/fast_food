@@ -15,7 +15,8 @@ class Category extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'status'
+        'status',
+        'img_path'
     ];
 
     public function languages()

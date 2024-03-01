@@ -25,14 +25,7 @@ class CategoryRepository{
     }
 
     public function store($datas){
-        $category = Category::create(['status' => true]);
-        $localeMappings = config('app.languages');
-
-        foreach($datas as $num => $data){
-            $category->languages()->attach([['name' => $data, 'language_id'=>$localeMappings[$num]]]);
-        }
-
-        return $category;
+        return Category::create(['status' => true]);
     }
 
     public function findById($id){

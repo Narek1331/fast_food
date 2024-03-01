@@ -17,12 +17,12 @@ class FileUploadService
         $path = $file->storeAs($directory, $filename);
 
         // Return the path to the stored file
-        return $path;
+        return str_replace("public", "/storage", $path);
     }
 
     public function deleteImage($path)
     {
         // Delete the image file from storage
-        Storage::delete($path);
+        Storage::delete(str_replace("/storage", "public", $path));
     }
 }

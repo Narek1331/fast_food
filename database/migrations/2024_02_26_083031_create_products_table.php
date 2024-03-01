@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('price')->default(0);
             $table->integer('old_price')->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             // $table->foreign('category_id')
             // ->references('id')
@@ -33,5 +34,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('products');
+        $table->dropSoftDeletes();
+
     }
 };

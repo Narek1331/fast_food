@@ -34,8 +34,21 @@ class ProductRepository{
             ->paginate(5);
     }
 
-    public function store($datas){
-        
+    public function store($datas){}
 
+    public function getById(int $product_id){
+        return Product::with(['languages' => function ($query) {
+                return $query->select('languageables.name', 'languageables.description', 'languages.name as code');
+            }])
+            ->with(['sizes' => function($q){
+                return $q->select('product_id','price','name','old_price','size_id');
+            }])
+            ->with('ingredients')
+            ->find($product_id);
+    }
+
+    public function destroy(int $product_id){
+        $product = $this->getById($product_id);
+        $product->delete();
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\IngredientService;
+use App\Services\LanguageService;
+use App\Http\Requests\Admin\StoreOrUpdateIngredientRequest;
 
 class IngredientController extends Controller
 {
@@ -22,9 +24,14 @@ class IngredientController extends Controller
      *
      * @return void
      */
-    public function __construct(IngredientService $ingredient_serv)
+    public function __construct(
+        IngredientService $ingredient_serv,
+        LanguageService $language_serv,
+
+        )
     {
         $this->ingredient_serv = $ingredient_serv;
+        $this->language_serv = $language_serv;
     }
 
     /**
@@ -34,8 +41,12 @@ class IngredientController extends Controller
      */
     public function index()
     {
+        $languages = $this->language_serv->getAll();
         $ingredients = $this->ingredient_serv->paginateAll(5);
-        return view('admin.product.ingredient.index', ['ingredients' => $ingredients]);
+        return view('admin.product.ingredient.index', [
+            'languages' => $languages,
+            'ingredients' => $ingredients
+        ]);
     }
 
     /**
@@ -45,7 +56,9 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        return view('admin.product.ingredient.create');
+        $languages = $this->language_serv->getAll();
+
+        return view('admin.product.ingredient.create',['languages'=> $languages]);
     }
 
     /**
@@ -57,7 +70,7 @@ class IngredientController extends Controller
      */
     public function store(StoreOrUpdateIngredientRequest $request)
     {
-        $this->ingredient_serv->store($request->name);
+        $this->ingredient_serv->store($request->validated());
 
         return redirect()->route('admin.product.ingredient');
     }
@@ -71,8 +84,12 @@ class IngredientController extends Controller
      */
     public function edit(int $id)
     {
-        $ingredient = $this->ingredient_serv->findOrFailById($id);
-        return view('admin.product.ingredient.edit', ['ingredient' => $ingredient]);
+        $languages = $this->language_serv->getAll();
+        $ingredient = $this->ingredient_serv->findWithAllLanguages($id);
+        return view('admin.product.ingredient.edit', [
+            'ingredient' => $ingredient,
+            'languages' => $languages
+        ]);
     }
 
     /**
@@ -86,7 +103,7 @@ class IngredientController extends Controller
     public function update(int $id, StoreOrUpdateIngredientRequest $request)
     {
         $this->ingredient_serv->findOrFailById($id);
-        $this->ingredient_serv->update($id, $request->name);
+        $this->ingredient_serv->update($id, $request->validated());
         return redirect()->route('admin.product.ingredient');
     }
 

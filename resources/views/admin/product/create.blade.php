@@ -13,6 +13,21 @@
     <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
+            <div class="form-group text-center">
+                <img src="" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;" id="previewImg">
+            </div>
+            <div class="form-group">
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="image">
+                    <label  class="custom-file-label" for="customFile">{{__('main.Choose image')}}</label>
+                    @error('image')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
             <div class="form-group">
                 <label for="InputCategory">{{ __('main.Select the category')}}</label>
                 <select class="custom-select form-control-border" id="InputCategory" name="category">
@@ -46,7 +61,7 @@
             @enderror
         </div>
             @endforeach
-            
+
             <div class="form-group">
                 <label for="InputPrice"> {{ __('main.Enter the price') }} ֏</label>
                 <input type="number" class="form-control" id="InputPrice" placeholder="{{ __('main.Enter the price') }}" name="price">
@@ -56,18 +71,7 @@
                     </span>
                 @enderror
             </div>
-            <div class="form-group">
-
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" name="image">
-                    <label  class="custom-file-label" for="customFile">{{__('main.Choose image')}}</label>
-                    @error('image')
-                        <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
+          
             <div class="form-group">
                 <label for="selectSizes">
                     {{__('main.Add Sizes and price')}}
@@ -85,7 +89,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <input type="number" class="form-control" id="input_{{ $size->id }}" placeholder="{{ __('main.Enter the price') . ' '. $size->name}}" name="sizes[{{ $size->name }}]" disabled> 
+                                <input type="number" class="form-control" id="input_{{ $size->id }}" placeholder="{{ __('main.Enter the price') . ' '. $size->name}}" name="sizes[{{ $size->name }}]" disabled>
                             </div>
                         </div>
                     </div>
@@ -98,7 +102,7 @@
                     </label>
                     <select multiple="" class="form-control" name="ingredients[]" >
                         @foreach ($ingredients as $ingredient )
-                            <option value="{{$ingredient->id}}">{{$ingredient->name}}</option>
+                            <option value="{{$ingredient->id}}">{{$ingredient['translate']['name']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -131,6 +135,18 @@
                 input.disabled = !this.checked;
             });
         });
+    });
+    document.getElementById('customFile').addEventListener('change', function(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var previewImage = document.getElementById('previewImg');
+            previewImage.src = dataURL;
+        };
+
+        reader.readAsDataURL(input.files[0]);
     });
 </script>
 @stop

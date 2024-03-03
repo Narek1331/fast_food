@@ -14,7 +14,7 @@
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4//css/all.css"/>
@@ -66,7 +66,7 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="/" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <a href="{{ route('food.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link">Shop</a>
                             <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -80,14 +80,20 @@
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="#" class="position-relative me-4 my-auto">
+                            <a href="{{ route('basket.index',['locale'=>app()->getLocale()]) }}" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="#" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
+                            @if (auth()->check())
+                                <a href="{{ route('auth.logout',['locale'=>app()->getLocale()]) }}" class="my-auto">
+                                    <i class="fas fa-sign-out fa-2x"></i>
+                                </a>
+                            @else
+                                <a href="{{ route('auth.login',['locale'=>app()->getLocale()]) }}" class="my-auto">
+                                    <i class="fas fa-user fa-2x"></i>
+                                </a>
+                            @endif
+
                         </div>
                     </div>
                 </nav>
@@ -149,7 +155,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Why People Like us!</h4>
-                            <p class="mb-4">typesetting, remaining essentially unchanged. It was 
+                            <p class="mb-4">typesetting, remaining essentially unchanged. It was
                                 popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
                             <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
                         </div>
@@ -199,7 +205,7 @@
                         <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">Narek</a> 
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">Narek</a>
                     </div>
                 </div>
             </div>
@@ -209,10 +215,12 @@
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
-        
+
     <!-- JavaScript Libraries -->
+    @yield('js')
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist//js/bootstrap.bundle.min.js"></script>
     <script src="/lib/easing/easing.min.js"></script>

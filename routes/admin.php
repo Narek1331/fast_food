@@ -10,9 +10,19 @@ use App\Http\Controllers\Admin\IngredientController;
 
 Route::get('/', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/signin', [AuthController::class, 'signin'])->name('admin.signin');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('admin.auth')->name('admin.logout');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('admin_or_moderator.auth')->name('admin.logout');
 
-Route::group(['prefix'=>'profile','middleware'=>'admin.auth'], function () {
+Route::group(['middleware'=>'admin_or_moderator.auth'], function () {
+    Route::get('/change_password', [AuthController::class, 'changePassword'])->name('admin.change_password');
+    Route::post('/change_password', [AuthController::class, 'saveChangePassword'])->name('admin.save_change_password');
+});
+
+Route::group(['middleware'=>'admin.auth'], function () {
+    Route::get('/add_user', [AuthController::class, 'addUser'])->name('admin.add_user');
+    Route::post('/add_user', [AuthController::class, 'saveUser'])->name('admin.save_add_user');
+});
+
+Route::group(['prefix'=>'profile','middleware'=>'admin_or_moderator.auth'], function () {
     Route::get('/', [ProfileController::class, 'index'])->name('admin.profile');
 
     Route::group(['prefix'=>'product'], function () {

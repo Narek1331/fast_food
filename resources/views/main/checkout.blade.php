@@ -1,10 +1,10 @@
 @extends('main.layout')
- 
+
  @section('title', 'Page Title')
- 
-  
+
+
  @section('content')
-  
+
   <!-- Single Page Header start -->
   <div class="container-fluid page-header py-5">
             <h1 class="text-center text-white display-6">Checkout</h1>

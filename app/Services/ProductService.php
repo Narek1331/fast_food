@@ -42,6 +42,15 @@ class ProductService{
     public function getAll(){
         return $this->product_repo->getAll();
     }
+    
+    /**
+     * paginate all products.
+     *
+     * @return mixed
+     */
+    public function paginateAll(){
+        return $this->product_repo->paginateAll();
+    }
 
     /**
      * Get all products with all languages.
@@ -161,10 +170,10 @@ class ProductService{
                 ]
             ]);
         }
+        $product->ingredients()->detach();
 
         // Attaching ingredients if provided
         if(isset($datas['ingredients'])){
-            $product->ingredients()->detach();
             $product->ingredients()->attach($datas['ingredients']);
         }
 

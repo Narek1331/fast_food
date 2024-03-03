@@ -12,7 +12,9 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+    'wrong_password' => 'Սխալ գաղտնաբառ',
+    'verified_email' => 'Ձեր էլփոստի հասցեն պետք է հաստատվի:',
+    'custom_phone_number_validation' => 'Հեռախոսահամարը պետք է լինի +374{որևէ 8 համար} կամ 0{ցանկացած 8 համար} ձևաչափով:',
     'accepted' => 'Ընդունված պետք է լինի :attribute դաշտը։',
     'accepted_if' => 'Ընդունված պետք է լինի :attribute դաշտը, երբ :other-ը :value է։',
     'active_url' => ':attribute դաշտը պետք է լինի վավեր URL։',
@@ -157,7 +159,7 @@ return [
     'url' => ':attribute դաշտը պետք է լինի վավեր URL։',
     'ulid' => ':attribute դաշտը պետք է լինի վավեր ULID։',
     'uuid' => ':attribute դաշտը պետք է լինի վավեր UUID։',
-    
+
 
     /*
     |--------------------------------------------------------------------------

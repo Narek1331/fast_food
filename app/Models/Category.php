@@ -26,7 +26,12 @@ class Category extends Model
 
     public function translate()
     {
-        return $this->morphOne(Languageable::class, 'languageable');
+        $locale = app()->getLocale();
+        $localeMappings = config('app.languages');
+
+        $l = $localeMappings[$locale];
+        return $this->morphOne(Languageable::class, 'languageable')
+        ->where('language_id',$l); 
     }
 
     public function getNameAttribute()

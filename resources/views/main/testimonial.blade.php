@@ -1,5 +1,5 @@
 @extends('main.layout')
- 
+
 @section('title', 'Page Title')
 
 @section('content')

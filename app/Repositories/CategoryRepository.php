@@ -21,7 +21,8 @@ class CategoryRepository{
         $l = $localeMappings[$locale];
         return Category::whereHas('translate', function ($query) use ($l) {
                 $query->where('language_id', $l);
-            })->get();
+            })
+            ->get();
     }
 
     public function store($datas){

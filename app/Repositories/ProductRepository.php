@@ -51,4 +51,24 @@ class ProductRepository{
         $product = $this->getById($product_id);
         $product->delete();
     }
+
+    public function paginateAll($status = true)
+    {
+        $locale = app()->getLocale();
+        $localeMappings = config('app.languages');
+
+        $l = $localeMappings[$locale];
+        return Product::whereHas('translate', function ($query) use ($l) {
+                $query->where('language_id', $l);
+            })
+            ->with(['sizes' => function($q){
+                return $q->select('product_id','price','name','old_price','size_id');
+            }])
+            ->with(['ingredients' => function($q) use ($l){
+                return $q->whereHas('translate', function ($query) use ($l) {
+                        $query->where('language_id', $l);
+                    });
+            }])
+            ->get();
+    }
 }

@@ -25,8 +25,8 @@
                             <th scope="col">{{ __('main.Name') }}</th>
                             <th scope="col">{{ __('main.Price') }}</th>
                             <th scope="col">{{ __('main.Quantity') }}</th>
-                            <th scope="col">{{ __('main.Total') }}</th>
                             <th scope="col">{{ __('main.Ingredients') }}</th>
+                            <th scope="col">{{ __('main.Total') }}</th>
                             <th scope="col">{{ __('main.Action') }}</th>
                           </tr>
                         </thead>
@@ -80,7 +80,7 @@
                         <div class="bg-light rounded">
                             <div class="p-4">
                                 <h1 class="display-6 mb-4">{{__('main.Total cart count')}}</h1>
-                                <div class="d-flex justify-content-between mb-4">
+                                {{-- <div class="d-flex justify-content-between mb-4">
                                     <h5 class="mb-0 me-4">{{__('main.Subtotal')}}</h5>
                                     <p class="mb-0">{{$baskets->sum('total_price')}} ֏</p>
                                 </div>
@@ -91,10 +91,10 @@
                                     </div>
                                 </div>
                                 <p class="mb-0 text-end">Shipping to Ukraine.</p>
-                            </div>
+                            </div> --}}
                             <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                                 <h5 class="mb-0 ps-4 me-4">{{__('main.Total')}}</h5>
-                                <p class="mb-0 pe-4">$99.00</p>
+                                <p class="mb-0 pe-4">{{formatPrice($baskets->sum('total_price'))}} ֏</p>
                             </div>
                             <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">{{__('main.Proceed Checkout')}}</button>
                         </div>

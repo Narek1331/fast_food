@@ -27,6 +27,7 @@ class GlobalVariablesServiceProvider extends ServiceProvider
         }
         config([
             'app.languages' => $langArr,
+            'delivery.price' => 1000
         ]);
     }
 }

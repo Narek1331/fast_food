@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
             Admin\UsersSeeder::class,
             Product\SizesSeeder::class,
             LanguageSeeder::class,
+            StatesSeeder::class,
+            SettlementsSeeder::class,
+            PaymentMethodsSeeder::class,
         ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EmailVerificationController;
 
 /*
@@ -56,6 +57,10 @@ Route::group(['prefix'=>'basket','middleware' => 'customer.auth'], function () {
     Route::get('/', [BasketController::class, 'index'])->name('basket.index');
     Route::post('/', [BasketController::class, 'store'])->name('basket.store');
     Route::delete('/{id}', [BasketController::class, 'destroy'])->where('id', '[0-9]+')->name('basket.destroy');
+});
+
+Route::group(['prefix'=>'order','middleware' => 'customer.auth'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('order.index');
 });
 
 Route::group(['prefix'=>'category'], function () {

@@ -59,7 +59,7 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fast Food</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -82,7 +82,7 @@
                         <div class="d-flex m-3 me-0">
                             <a href="{{ route('basket.index',['locale'=>app()->getLocale()]) }}" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{auth()->user()->baskets()->count()}}</span>
                             </a>
                             @if (auth()->check())
                                 <a href="{{ route('auth.logout',['locale'=>app()->getLocale()]) }}" class="my-auto">
@@ -131,8 +131,8 @@
                     <div class="row g-4">
                         <div class="col-lg-3">
                             <a href="/">
-                                <h1 class="text-primary mb-0">Fruitables</h1>
-                                <p class="text-secondary mb-0">Fresh products</p>
+                                <h1 class="text-primary mb-0">Fast Food</h1>
+                                <p class="text-secondary mb-0">Fresh foods</p>
                             </a>
                         </div>
                         <div class="col-lg-6">

@@ -17,6 +17,7 @@
         <!-- Cart Page Start -->
         <div class="container-fluid py-5">
             <div class="container py-5">
+                @if(count($baskets))
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -24,6 +25,7 @@
                             <th scope="col">{{ __('main.Product') }}</th>
                             <th scope="col">{{ __('main.Name') }}</th>
                             <th scope="col">{{ __('main.Price') }}</th>
+                            <th scope="col">{{ __('main.Size') }}</th>
                             <th scope="col">{{ __('main.Quantity') }}</th>
                             <th scope="col">{{ __('main.Ingredients') }}</th>
                             <th scope="col">{{ __('main.Total') }}</th>
@@ -43,6 +45,9 @@
                                     </td>
                                     <td>
                                         <p class="mb-0 mt-4">{{ $basket->product_price ? $basket->product_price : $basket->product_size_price }} ֏ </p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 mt-4">{{ $basket->basket_size_name ?? '-' }} </p>
                                     </td>
                                     <td>
                                         <p class="mb-0 mt-4">{{ $basket->basket_count }}</p>
@@ -69,6 +74,7 @@
                         </tbody>
                     </table>
                 </div>
+                @endif
                 {{-- <div class="mt-5">
                     <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
                     <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
@@ -79,6 +85,8 @@
                     <div class="">
                         <div class="bg-light rounded">
                             <div class="p-4">
+                                @if(count($baskets))
+
                                 <h1 class="display-6 mb-4">{{__('main.Total cart count')}}</h1>
                                 {{-- <div class="d-flex justify-content-between mb-4">
                                     <h5 class="mb-0 me-4">{{__('main.Subtotal')}}</h5>
@@ -96,7 +104,13 @@
                                 <h5 class="mb-0 ps-4 me-4">{{__('main.Total')}}</h5>
                                 <p class="mb-0 pe-4">{{formatPrice($baskets->sum('total_price'))}} ֏</p>
                             </div>
-                            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">{{__('main.Proceed Checkout')}}</button>
+                            <a href="{{route('order.index',['locale'=>app()->getLocale()])}}" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">{{__('main.Proceed Checkout')}}</a>
+                            @else
+                            <div class="text-center">
+                                <a href="{{route('food.index',['locale'=>app()->getLocale()])}}" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">{{__('main.The basket is empty. return to Food page')}}</a>
+                            </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

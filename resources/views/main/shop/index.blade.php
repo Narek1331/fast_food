@@ -88,7 +88,7 @@
 
                                                         <ul class="list-group list_z_index d-none" id="toggleContent_{{$productNum}}">
                                                             <li class="list-group-item list_z_index text-center">
-                                                                <button class="btn text-secondary" onclick="toggleContent({{$productNum}})">
+                                                                <button class="btn text-secondary" onclick="toggleContent({{$productNum}})" type="button">
                                                                     {{__('main.Close the window')}}
                                                                 </button>
                                                             </li>

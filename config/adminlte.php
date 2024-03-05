@@ -311,6 +311,21 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        ['header' => 'orders'],
+        [
+            'text'        => 'Active orders',
+            'url'         => 'admin/profile/product/category',
+            'icon'        => 'far fa-fw fa-file',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Archive orders',
+            'url'         => 'admin/profile/product/category',
+            'icon'        => 'far fa-fw fa-file',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
         ['header' => 'products'],
         [
             'text'        => 'Categories',

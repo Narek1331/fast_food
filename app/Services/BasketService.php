@@ -33,9 +33,11 @@ class BasketService{
         }else if (
             $old_basket
             && !isset($datas['ingredients'])
+            && count($old_basket->ingredients) == 0
         ){
             return $this->basket_repo->updateCount($old_basket,$datas['count']);
         }
+
 
         $basket = $this->basket_repo->store(
             $datas['product_id'],

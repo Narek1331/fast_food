@@ -33,6 +33,10 @@ class HomeController extends Controller
         return view('main.checkout');
     }
 
+    public function contact(){
+        return view('main.contact');
+    }
+
     public function testimonial(){
         return view('main.testimonial');
     }

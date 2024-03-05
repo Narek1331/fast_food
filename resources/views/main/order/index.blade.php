@@ -20,7 +20,8 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <h1 class="mb-4">{{__('main.Billing details')}}</h1>
-                <form action="#">
+                <form action="{{route('order.store',['locale'=>app()->getLocale()])}}" method="POST">
+                    @csrf
                     <div class="row g-5">
                         <div class="col-md-12 col-lg-6 col-xl-7">
                             <div class="form-item">
@@ -55,21 +56,21 @@
 
                             <div class="form-item">
                                 <label for="states" class="form-label my-3">{{ __('main.Select a state') }}<sup>*</sup></label>
-                                <select id="states" name="states" class="form-select">
+                                <select id="states" name="state" class="form-select" required>
                                     @foreach ($states as $state)
-                                        <option name="state" value="{{ $state['name'] }}">{{ $state['name'] }}</option>
+                                        <option value="{{ $state['id'] }}">{{ $state['name'] }}</option>
                                     @endforeach
                                 </select>
 
                                 <label for="settlements" class="form-label my-3">{{ __('main.Select a settlement') }}<sup>*</sup></label>
-                                <select id="settlements" name="settlements" class="form-select">
+                                <select id="settlements" name="settlement" class="form-select" required>
                                 </select>
                             </div>
 
 
                             <div class="form-item">
                                 <label class="form-label my-3">{{__('main.Enter address')}}<sup>*</sup></label>
-                                <input type="text" class="form-control" name="address">
+                                <input type="text" class="form-control" name="address" required>
                             </div>
 
 
@@ -86,6 +87,7 @@
                                             <th scope="col">{{ __('main.Product') }}</th>
                                             <th scope="col">{{ __('main.Name') }}</th>
                                             <th scope="col">{{ __('main.Price') }}</th>
+                                            <th scope="col">{{ __('main.Size') }}</th>
                                             <th scope="col">{{ __('main.Quantity') }}</th>
                                             <th scope="col">{{ __('main.Ingredients') }}</th>
                                             <th scope="col">{{ __('main.Total') }}</th>
@@ -102,6 +104,7 @@
                                                 </th>
                                                 <td class="py-5">{{$basket->product_name}}</td>
                                                 <td class="py-5">{{ $basket->product_price ? $basket->product_price : $basket->product_size_price }} ֏</td>
+                                                <td class="py-5">{{ $basket->basket_size_name ?? '-' }}</td>
                                                 <td class="py-5">{{ $basket->basket_count }}</td>
                                                 <td class="py-5">
                                                     {{ $basket->ingredient_names ?? '-' }}
@@ -120,7 +123,7 @@
                                             <td colspan="3" class="py-5">
                                                 @foreach ($payment_methods as $pay)
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                        <input class="form-check-input" type="radio" name="payment_method" id="flexRadioDefault1" value="{{$pay->id}}" checked>
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             {{ $pay->translate->name }}
                                                         </label>
@@ -146,7 +149,7 @@
                                 </table>
                             </div>
                             <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                                <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">{{__('main.Place Order')}}</button>
+                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">{{__('main.Place Order')}}</button>
                             </div>
                         </div>
                     </div>
@@ -164,11 +167,13 @@
 
     function populateSettlements() {
         const selectedState = stateSelect.value;
-        const stateData = statesData.find(state => state.name === selectedState);
+        // const stateData = statesData.find(state => state.name === selectedState);
+        const stateData = statesData.find(state => state.id == selectedState);
+
         settlementSelect.innerHTML = ''; // Clear previous options
         stateData.settlements.forEach(settlement => {
             const option = document.createElement('option');
-            option.value = settlement.name;
+            option.value = settlement.id;
             option.textContent = settlement.name;
             settlementSelect.appendChild(option);
         });

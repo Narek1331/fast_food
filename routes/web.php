@@ -8,6 +8,7 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmailVerificationController;
 
 /*
@@ -26,16 +27,8 @@ Route::redirect('/', '/am');
 
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'localization'], function () {
 
-Route::group([], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-    // Route::get('/shop', [HomeController::class, 'shop']);
-    Route::get('/shop/{id}', [HomeController::class, 'shopSingle']);
-    Route::get('/contact', [HomeController::class, 'contact']);
-    Route::get('/checkout', [HomeController::class, 'checkout']);
-    Route::get('/testimonial', [HomeController::class, 'testimonial']);
-    // Route::get('/basket', [HomeController::class, 'basket']);
-    Route::get('/not_found', [HomeController::class, 'notFound']);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::group(['prefix'=>'auth','middleware'=>'guest'], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
@@ -53,6 +46,10 @@ Route::group(['prefix'=>'food'], function () {
     Route::get('/{id}', [FoodController::class, 'show'])->where('id', '[0-9]+')->name('food.show');
 });
 
+Route::group(['prefix'=>'contact'], function () {
+    Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+});
+
 Route::group(['prefix'=>'basket','middleware' => 'customer.auth'], function () {
     Route::get('/', [BasketController::class, 'index'])->name('basket.index');
     Route::post('/', [BasketController::class, 'store'])->name('basket.store');
@@ -61,6 +58,12 @@ Route::group(['prefix'=>'basket','middleware' => 'customer.auth'], function () {
 
 Route::group(['prefix'=>'order','middleware' => 'customer.auth'], function () {
     Route::get('/', [OrderController::class, 'index'])->name('order.index');
+    Route::post('/', [OrderController::class, 'store'])->name('order.store');
+
+    Route::group(['prefix'=>'my'], function () {
+        Route::get('/', [OrderController::class, 'my'])->name('order.my');
+    });
+
 });
 
 Route::group(['prefix'=>'category'], function () {

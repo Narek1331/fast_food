@@ -314,14 +314,14 @@ return [
         ['header' => 'orders'],
         [
             'text'        => 'Active orders',
-            'url'         => 'admin/profile/product/category',
+            'url'         => '/admin/profile/order',
             'icon'        => 'far fa-fw fa-file',
             // 'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Archive orders',
-            'url'         => 'admin/profile/product/category',
+            'url'         => '/admin/profile/order/archived',
             'icon'        => 'far fa-fw fa-file',
             // 'label'       => 4,
             'label_color' => 'success',

@@ -92,6 +92,7 @@ return [
     'Proceed Checkout' => 'Շարունակել վճարումը',
     'Ingredients' => 'Բաղադրիչներ',
     'Order' => 'Պատվեր',
+    'Orders' => 'Պատվերներ',
     'To Order' => 'Պատվիրել',
     'Billing details' => 'Վճարման մանրամասները',
     'Select a state' => 'Ընտրեք մարզը',
@@ -133,4 +134,9 @@ return [
     'making' => 'Պատրաստում է',
     'View archived orders' => 'Տեսնել արխիվացված պատվերները',
     'View active orders' => 'Տեսնել ակտիվ պատվերները',
+    'Status' => 'Կարգավիճակ',
+    'Change Status' => 'Փոխել կարգավիճակը',
+    'Show Order' => 'Պատվերի ցուցադրում',
+    'Find order by order number' => 'Գտեք պատվերը ըստ պատվերի համարի',
+    'Order has ended, status cannot be changed' => 'Պատվերն ավարտվել է, կարգավիճակը հնարավոր չէ փոխել',
 ];

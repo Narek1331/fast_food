@@ -38,9 +38,9 @@ class Order extends Model
         return $this->hasMany(OrderProduct::class);
     }
 
-    public function status()
+    public function Status()
     {
-        return $this->hasOne(OrderStatus::class);
+        return $this->hasOne(OrderStatus::class,'id','status');
     }
 
     public function products()

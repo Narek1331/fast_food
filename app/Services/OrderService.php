@@ -2,15 +2,36 @@
 namespace App\Services;
 
 use App\Repositories\OrderRepository;
+use App\Repositories\OrderStatusRepository;
 
 class OrderService{
 
-    public function __construct(OrderRepository $order_repo){
+    public function __construct(
+        OrderRepository $order_repo,
+        OrderStatusRepository $order_status_repo,
+        ){
         $this->order_repo = $order_repo;
+        $this->order_status_repo = $order_status_repo;
     }
 
-    public function getMy($status = 0){
-        return $this->order_repo->getByUserId(auth()->user()->id,$status);
+    public function getMy($ended = 0){
+        return $this->order_repo->getByUserId(auth()->user()->id,$ended);
+    }
+
+    public function getById(int $order_id){
+        return $this->order_repo->getById($order_id);
+    }
+
+    public function getAll($ended = 0){
+        return $this->order_repo->getAll($ended);
+    }
+
+    public function paginateAll($params = []){
+        return $this->order_repo->paginateAll($params);
+    }
+
+    public function getOrderById(int $order_id){
+        return $this->order_repo->getOrderById($order_id);
     }
 
     public function store($datas){
@@ -46,6 +67,19 @@ class OrderService{
 
         auth()->user()->baskets()->delete();
 
+        return $order;
+    }
+
+    public function updateStatus(int $order_id, int $status_id){
+        $order = $this->order_repo->find($order_id);
+        $latestStatus = $this->order_status_repo->getLatestStatus();
+        $order->status = $status_id;
+
+        if($latestStatus['id'] == $status_id){
+            $order->ended = true;
+        }
+
+        $order->save();
         return $order;
     }
 }

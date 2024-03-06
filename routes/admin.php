@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\IngredientController;
 
 Route::get('/', [AuthController::class, 'login'])->name('admin.login');
@@ -16,6 +17,7 @@ Route::group(['middleware'=>'admin_or_moderator.auth'], function () {
     Route::get('/change_password', [AuthController::class, 'changePassword'])->name('admin.change_password');
     Route::post('/change_password', [AuthController::class, 'saveChangePassword'])->name('admin.save_change_password');
 });
+
 
 Route::group(['middleware'=>'admin.auth'], function () {
     Route::get('/add_user', [AuthController::class, 'addUser'])->name('admin.add_user');
@@ -62,5 +64,12 @@ Route::group(['prefix'=>'profile','middleware'=>'admin_or_moderator.auth'], func
             Route::get('/edit/{id}', [IngredientController::class, 'edit'])->where('id', '[0-9]+')->name('admin.product.ingredient.edit');
             Route::put('/{id}', [IngredientController::class, 'update'])->where('id', '[0-9]+')->name('admin.product.ingredient.update');
         });
+    });
+
+    Route::group(['prefix'=>'order'], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('admin.order');
+        Route::get('/archived', [OrderController::class, 'index'])->name('admin.order.archived');
+        Route::get('/{id}', [OrderController::class, 'show'])->where('id', '[0-9]+')->name('admin.order.show');
+        Route::patch('/{id}/status', [OrderController::class, 'updateStatus'])->where('id', '[0-9]+')->name('admin.order.update_status');
     });
 });

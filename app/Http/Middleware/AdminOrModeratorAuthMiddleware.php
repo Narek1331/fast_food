@@ -22,6 +22,6 @@ class AdminOrModeratorAuthMiddleware
         }
 
         // If the user is not authenticated or is not an admin, you can redirect them to a different route.
-        return redirect()->route('admin.login')->with('error', 'You are not authorized to access this page.');
+        return redirect()->route('home',['locale'=>app()->getLocale()])->with('error', 'You are not authorized to access this page.');
     }
 }

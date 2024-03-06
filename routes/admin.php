@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\SettlementController;
 
 Route::get('/', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/signin', [AuthController::class, 'signin'])->name('admin.signin');
@@ -83,4 +84,16 @@ Route::group(['prefix'=>'profile','middleware'=>'admin_or_moderator.auth'], func
         Route::delete('/{id}', [StateController::class, 'destroy'])->where('id', '[0-9]+')->name('admin.state.destroy');
         Route::get('/{id}', [StateController::class, 'show'])->where('id', '[0-9]+')->name('admin.state.show');
     });
+
+    Route::group(['prefix' => 'settlement'], function () {
+        Route::get('/', [SettlementController::class, 'index'])->name('admin.settlement');
+        Route::get('/create', [SettlementController::class, 'create'])->name('admin.settlement.create');
+        Route::post('/', [SettlementController::class, 'store'])->name('admin.settlement.store');
+        Route::get('/{id}/edit', [SettlementController::class, 'edit'])->where('id', '[0-9]+')->name('admin.settlement.edit');
+        Route::put('/{id}', [SettlementController::class, 'update'])->where('id', '[0-9]+')->name('admin.settlement.update');
+        Route::delete('/{id}', [SettlementController::class, 'destroy'])->where('id', '[0-9]+')->name('admin.settlement.destroy');
+        Route::get('/{id}', [SettlementController::class, 'show'])->where('id', '[0-9]+')->name('admin.settlement.show');
+    });
+
+
 });

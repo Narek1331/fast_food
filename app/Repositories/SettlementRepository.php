@@ -2,54 +2,54 @@
 
 namespace App\Repositories;
 
-use App\Models\State;
+use App\Models\Settlement;
 
 /**
- * Class StateRepository
+ * Class SettlementRepository
  * @package App\Repositories
  */
-class StateRepository
+class SettlementRepository
 {
     /**
-     * Get all states.
+     * Get all settlements.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|State[]
+     * @return \Illuminate\Database\Eloquent\Collection|Settlement[]
      */
     public function getAll()
     {
-        return State::with('settlements')->get();
+        return Settlement::with('state')->get();
     }
 
     /**
      * Paginate all states.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|State[]
+     * @return \Illuminate\Database\Eloquent\Collection|Settlement[]
      */
     public function paginateAll($paginate = 10)
     {
-        return State::with('settlements')->paginate($paginate);
+        return Settlement::with('state')->paginate($paginate);
     }
 
     /**
      * Get a state by its ID.
      *
      * @param int $id
-     * @return State
+     * @return Settlement
      */
     public function getById($id)
     {
-        return State::findOrFail($id);
+        return Settlement::findOrFail($id);
     }
 
     /**
      * Create a new state.
      *
      * @param array $attributes
-     * @return State
+     * @return Settlement
      */
     public function create(array $attributes)
     {
-        return State::create($attributes);
+        return Settlement::create($attributes);
     }
 
     /**
@@ -57,7 +57,7 @@ class StateRepository
      *
      * @param int $id
      * @param array $attributes
-     * @return State
+     * @return Settlement
      */
     public function update($id, array $attributes)
     {

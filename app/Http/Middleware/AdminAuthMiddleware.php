@@ -19,6 +19,6 @@ class AdminAuthMiddleware
             return $next($request);
         }
 
-        return redirect()->route('admin.login')->with('error', 'You are not authorized to access this page.');
+        return redirect()->route('home',['locale'=>app()->getLocale()])->with('error', 'You are not authorized to access this page.');
     }
 }

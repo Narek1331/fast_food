@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\StateService;
+use App\Http\Requests\Admin\StoreOrUpdateStateRequest;
 
 class StateController extends Controller
 {
@@ -27,7 +28,7 @@ class StateController extends Controller
      */
     public function index()
     {
-        $states = $this->stateService->getAll();
+        $states = $this->stateService->paginateAll();
         return view('admin.state.index', compact('states'));
     }
 
@@ -47,9 +48,9 @@ class StateController extends Controller
      * @param  \Illuminate\Http\Request  $request The HTTP request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdateStateRequest $request)
     {
-        $this->stateService->create($request->all());
+        $this->stateService->create($request->validated());
         return redirect()->route('admin.state');
     }
 
@@ -92,10 +93,10 @@ class StateController extends Controller
      * @param  int  $id The state ID
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(StoreOrUpdateStateRequest $request, $id)
     {
         try {
-            $this->stateService->update($id, $request->all());
+            $this->stateService->update($id, $request->validated());
             return redirect()->route('admin.state');
         } catch (\Exception $e) {
             return redirect()->route('admin.state')->with('error', 'State not found.');

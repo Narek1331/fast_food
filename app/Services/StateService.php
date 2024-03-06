@@ -31,6 +31,16 @@ class StateService
     }
 
     /**
+     * Paginate all states.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\State[]
+     */
+    public function paginateAll()
+    {
+        return $this->stateRepository->paginateAll();
+    }
+
+    /**
      * Get a state by its ID.
      *
      * @param int $id

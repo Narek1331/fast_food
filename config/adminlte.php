@@ -355,6 +355,20 @@ return [
             'label_color' => 'success',
         ],
 
+        ['header' => 'delivery'],
+        [
+            'text'        => 'states',
+            'url'         => '/admin/profile/state',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'settlements',
+            'url'         => '/admin/profile/settlement',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'change_password',

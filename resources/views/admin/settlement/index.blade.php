@@ -1,19 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', __('main.States'))
+@section('title', __('main.Settlements'))
 
 @section('content')
 <br>
 <div class="card">
     <div class="card-header">
     <h3 class="card-title">
-        {{ __('main.States') }}
+        {{ __('main.Settlements') }}
     </h3>
     </div>
 
     <div class="card-body">
     <div class="text-center">
-        <a class="btn" href="{{ route('admin.state.create') }}">
+        <a class="btn" href="{{ route('admin.settlement.create') }}">
             {{ __('main.Create new') }}
         </a>
     </div>
@@ -22,27 +22,29 @@
     <tr>
         <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID">ID</th>
         <th>{{ __('main.Name') }}</th>
+        <th>{{ __('main.State') }}</th>
         <th>{{ __('main.Action') }}</th>
 
     </tr>
     </thead>
     <tbody>
 
-        @foreach ($states as $state)
+        @foreach ($settlements as $settlement)
         <tr class="odd">
 
-            <td class="dtr-control sorting_1" tabindex="{{ $state->id }}">{{ $state->id }}</td>
-            <td>{{ $state->name }}</td>
+            <td class="dtr-control sorting_1" tabindex="{{ $settlement->id }}">{{ $settlement->id }}</td>
+            <td>{{ $settlement->name }}</td>
+            <td>{{ $settlement->state->name }}</td>
             <td>
                 <div class="d-flex justify-content-between">
-                    <form method="POST" action="{{ route('admin.state.destroy',['id'=>$state->id]) }}">
+                    <form method="POST" action="{{ route('admin.settlement.destroy',['id'=>$settlement->id]) }}">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger">
                             {{ __('main.Delete') }}
                         </button>
                     </form>
-                    <a class="btn btn-primary"  href="{{ route('admin.state.edit', ['id' => $state->id]) }}">
+                    <a class="btn btn-primary"  href="{{ route('admin.settlement.edit', ['id' => $settlement->id]) }}">
                         {{ __('main.Edit') }}
                     </a>
                 </div>
@@ -60,10 +62,10 @@
 </div>
 <div class="row">
     <div class="col-sm-12 col-md-5">
-        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"> {{ __('main.Total count') }}: {{ $states->total() }}</div>
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"> {{ __('main.Total count') }}: {{ $settlements->total() }}</div>
     </div>
     <div class="col-sm-12 col-md-7">
-        {{ $states->links() }}
+        {{ $settlements->links() }}
 
     </div>
 </div>

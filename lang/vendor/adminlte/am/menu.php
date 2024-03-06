@@ -12,4 +12,7 @@ return [
     'orders'  => 'Պատվերներ',
     'Active orders'  => 'Ակտիվ պատվերներ',
     'Archive orders'  => 'Արխիվային պատվերներ',
+    'delivery'  => 'Առաքում',
+    'states'  => 'Մարզեր',
+    'settlements'  => 'Բնակավայրեր',
 ];

@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthService{
 
-    // public function __construct(CategoryRepository $category_repo){
-    //     $this->category_repo = $category_repo;
-    // }
-
+    /**
+     * Change the password for the authenticated user.
+     *
+     * @param  array  $request The request containing old and new passwords
+     * @return array An array containing status and message of the operation
+     */
     public function changePassword($request)
     {
         $user = Auth::user();

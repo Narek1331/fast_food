@@ -18,4 +18,7 @@ class Settlement extends Model
         'name',
         'state_id'
     ];
+
+    public $timestamps = false;
+
 }

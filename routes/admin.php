@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\IngredientController;
+use App\Http\Controllers\Admin\StateController;
 
 Route::get('/', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/signin', [AuthController::class, 'signin'])->name('admin.signin');
@@ -71,5 +72,15 @@ Route::group(['prefix'=>'profile','middleware'=>'admin_or_moderator.auth'], func
         Route::get('/archived', [OrderController::class, 'index'])->name('admin.order.archived');
         Route::get('/{id}', [OrderController::class, 'show'])->where('id', '[0-9]+')->name('admin.order.show');
         Route::patch('/{id}/status', [OrderController::class, 'updateStatus'])->where('id', '[0-9]+')->name('admin.order.update_status');
+    });
+
+    Route::group(['prefix' => 'state'], function () {
+        Route::get('/', [StateController::class, 'index'])->name('admin.state');
+        Route::get('/create', [StateController::class, 'create'])->name('admin.state.create');
+        Route::post('/', [StateController::class, 'store'])->name('admin.state.store');
+        Route::get('/{id}/edit', [StateController::class, 'edit'])->where('id', '[0-9]+')->name('admin.state.edit');
+        Route::put('/{id}', [StateController::class, 'update'])->where('id', '[0-9]+')->name('admin.state.update');
+        Route::delete('/{id}', [StateController::class, 'destroy'])->where('id', '[0-9]+')->name('admin.state.destroy');
+        Route::get('/{id}', [StateController::class, 'show'])->where('id', '[0-9]+')->name('admin.state.show');
     });
 });

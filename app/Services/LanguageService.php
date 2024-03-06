@@ -9,6 +9,11 @@ class LanguageService{
         $this->language_repo = $language_repo;
     }
 
+    /**
+     * Get all languages.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection The collection of languages
+     */
     public function getAll(){
         return $this->language_repo->getAll();
     }

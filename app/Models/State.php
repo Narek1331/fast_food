@@ -18,6 +18,8 @@ class State extends Model
         'name'
     ];
 
+    public $timestamps = false;
+
     public function settlements(){
         return $this->hasMany(Settlement::class);
     }

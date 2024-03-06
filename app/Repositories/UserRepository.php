@@ -27,10 +27,22 @@ class UserRepository {
         ]);
     }
 
+    /**
+     * Find a user by ID.
+     *
+     * @param  int  $id The ID of the user.
+     * @return \App\Models\User|null The found user instance or null if not found.
+     */
     public function findById(int $id){
         return User::find($id);
     }
 
+    /**
+     * Find a user by email.
+     *
+     * @param  string  $email The email of the user.
+     * @return \App\Models\User|null The found user instance or null if not found.
+     */
     public function findByEmail(string $email){
         return User::where('email',$email)->first();
     }

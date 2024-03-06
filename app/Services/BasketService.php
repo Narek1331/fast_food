@@ -6,10 +6,21 @@ use App\Repositories\BasketRepository;
 
 class BasketService{
 
+    /**
+     * BasketService constructor.
+     *
+     * @param \App\Repositories\BasketRepository $basket_repo The repository for baskets
+     */
     public function __construct(BasketRepository $basket_repo){
         $this->basket_repo = $basket_repo;
     }
 
+    /**
+     * Store a new basket or update an existing one.
+     *
+     * @param mixed $datas The data for the basket
+     * @return \App\Models\Basket The created or updated basket instance
+     */
     public function store(mixed $datas)
     {
         $old_basket = $this->basket_repo->findWithAllParams(
@@ -52,18 +63,34 @@ class BasketService{
             }
         }
 
-
         return $basket;
     }
 
+    /**
+     * Get baskets belonging to the authenticated user.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection The collection of baskets
+     */
     public function getMy(){
         return $this->basket_repo->getMy(auth()->user()->id);
     }
 
+    /**
+     * Find a basket by its ID and user ID.
+     *
+     * @param int $id The ID of the basket
+     * @return \App\Models\Basket|null The found basket or null if not found
+     */
     public function findByIdAndUserId(int $id){
         return $this->basket_repo->findByIdAndUserId(auth()->user()->id,$id);
     }
 
+    /**
+     * Delete a basket by its ID.
+     *
+     * @param int $id The ID of the basket to delete
+     * @return bool True if the basket is successfully deleted, false otherwise
+     */
     public function destroy(int $id){
         $basket = $this->basket_repo->findByIdAndUserId(auth()->user()->id,$id);
         
@@ -71,8 +98,6 @@ class BasketService{
             $basket->ingredients()->detach();
         }
 
-        return $basket->delete();
-        
+        return $basket->delete();  
     }
-
 }

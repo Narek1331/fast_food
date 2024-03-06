@@ -1,11 +1,18 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Models\Product;
 
 class ProductRepository{
 
 
+    /**
+     * Get all products with translations for the current locale.
+     *
+     * @param bool $status The status of products to fetch (optional)
+     * @return \Illuminate\Database\Eloquent\Collection The collection of products with translations
+     */
     public function getAll($status = true)
     {
         $locale = app()->getLocale();
@@ -20,6 +27,12 @@ class ProductRepository{
             ->get();
     }
 
+    /**
+     * Get all products with translations and pagination for the current locale.
+     *
+     * @param bool $status The status of products to fetch (optional)
+     * @return \Illuminate\Pagination\LengthAwarePaginator The paginated list of products with translations
+     */
     public function getWithAllLanguages($status = true)
     {
         $locale = app()->getLocale();
@@ -34,8 +47,20 @@ class ProductRepository{
             ->paginate(5);
     }
 
+    /**
+     * Store a new product.
+     *
+     * @param array $datas The data to create the product
+     * @return void
+     */
     public function store($datas){}
 
+    /**
+     * Get a product by its ID with translations, sizes, and ingredients.
+     *
+     * @param int $product_id The ID of the product
+     * @return \App\Models\Product|null The found product with translations, sizes, and ingredients or null if not found
+     */
     public function getById(int $product_id){
         return Product::with(['languages' => function ($query) {
                 return $query->select('languageables.name', 'languageables.description', 'languages.name as code');
@@ -47,11 +72,23 @@ class ProductRepository{
             ->find($product_id);
     }
 
+    /**
+     * Delete a product by its ID.
+     *
+     * @param int $product_id The ID of the product to delete
+     * @return void
+     */
     public function destroy(int $product_id){
         $product = $this->getById($product_id);
         $product->delete();
     }
 
+    /**
+     * Get all products with translations, sizes, and ingredients.
+     *
+     * @param bool $status The status of products to fetch (optional)
+     * @return \Illuminate\Database\Eloquent\Collection The collection of products with translations, sizes, and ingredients
+     */
     public function paginateAll($status = true)
     {
         $locale = app()->getLocale();

@@ -68,4 +68,9 @@ class UserService {
         return $user;
 
     }
+
+    public function paginateAllCustomers(){
+        $role = $this->role_repo->getByName('customer');
+        return $this->user_repo->paginateAllUsersByRoleId($role->id);
+    }
 }

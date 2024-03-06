@@ -145,4 +145,7 @@ return [
     'Show Order' => 'Պատվերի ցուցադրում',
     'Find order by order number' => 'Գտեք պատվերը ըստ պատվերի համարի',
     'Order has ended, status cannot be changed' => 'Պատվերն ավարտվել է, կարգավիճակը հնարավոր չէ փոխել',
+    'Customers' => 'Հաճախորդները',
+    'All' => 'Բոլորը',
+
 ];

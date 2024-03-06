@@ -54,13 +54,13 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fast Food</h1></a>
+                    <a href="{{ route('home',['locale'=>app()->getLocale()]) }}" class="navbar-brand"><h1 class="text-primary display-6">Fast Food</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="/" class="nav-item nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">{{__('main.Home')}}</a>
+                            <a href="{{ route('home',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">{{__('main.Home')}}</a>
                             <a href="{{ route('food.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'food.index' ? 'active' : '' }}">{{__('main.Food')}}</a>
                             <a href="{{ route('contact.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'contact.index' ? 'active' : '' }}">{{__('main.Contact')}}</a>
                         </div>
@@ -127,7 +127,7 @@
                                 <p class="text-secondary mb-0">Fresh foods</p>
                             </a>
                         </div>
-                      
+
                         {{-- <div class="col-lg-9 col-md-6">
                             <div class="d-flex justify-content-end pt-3">
                                 <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" ><i class="fab fa-twitter"></i></a>

@@ -42,14 +42,14 @@ class ProductService{
     public function getAll(){
         return $this->product_repo->getAll();
     }
-    
+
     /**
      * paginate all products.
      *
      * @return mixed
      */
-    public function paginateAll(){
-        return $this->product_repo->paginateAll();
+    public function paginateAll($params = []){
+        return $this->product_repo->paginateAll($params);
     }
 
     /**

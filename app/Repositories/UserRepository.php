@@ -47,4 +47,26 @@ class UserRepository {
         return User::where('email',$email)->first();
     }
 
+    /**
+     * Get all users by role ID.
+     *
+     * @param  int  $role_id The ID of the role
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllUsersByRoleId(int $role_id)
+    {
+        return User::where('role_id', $role_id)->get();
+    }
+
+    /**
+     * Paginate all users by role ID.
+     *
+     * @param  int  $role_id The ID of the role
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function paginateAllUsersByRoleId(int $role_id)
+    {
+        return User::where('role_id', $role_id)->paginate(10);
+    }
+
 }

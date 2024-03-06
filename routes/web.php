@@ -43,7 +43,8 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout
 
 Route::group(['prefix'=>'food'], function () {
     Route::get('/', [FoodController::class, 'index'])->name('food.index');
-    Route::get('/{id}', [FoodController::class, 'show'])->where('id', '[0-9]+')->name('food.show');
+    Route::get('/{category_id}', [FoodController::class, 'index'])->where('id', '[0-9]+')->name('food.by_category');
+    // Route::get('/{id}', [FoodController::class, 'show'])->where('id', '[0-9]+')->name('food.show');
 });
 
 Route::group(['prefix'=>'contact'], function () {

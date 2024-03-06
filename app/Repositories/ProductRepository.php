@@ -89,13 +89,13 @@ class ProductRepository{
      * @param bool $status The status of products to fetch (optional)
      * @return \Illuminate\Database\Eloquent\Collection The collection of products with translations, sizes, and ingredients
      */
-    public function paginateAll($status = true)
+    public function paginateAll($params = [], $status = true)
     {
         $locale = app()->getLocale();
         $localeMappings = config('app.languages');
 
         $l = $localeMappings[$locale];
-        return Product::whereHas('translate', function ($query) use ($l) {
+        $products = Product::whereHas('translate', function ($query) use ($l) {
                 $query->where('language_id', $l);
             })
             ->with(['sizes' => function($q){
@@ -105,7 +105,20 @@ class ProductRepository{
                 return $q->whereHas('translate', function ($query) use ($l) {
                         $query->where('language_id', $l);
                     });
-            }])
-            ->get();
+            }]);
+
+        if(isset($params['category_id'])){
+            $products = $products->where('category_id',$params['category_id']);
+        }
+        if(isset($params['q'])){
+            $products->whereHas('translate', function ($query) use ($l, $params) {
+                $query->where('name', $params['q'])
+                ->orWhere('name', 'like', '%' . $params['q'] . '%')
+                ->orWhere('name', 'like', '%' . $params['q'])
+                ->orWhere('name', 'like', $params['q'] . '%');
+            });
+        }
+
+        return $products->get();
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\SettlementController;
+use App\Http\Controllers\Admin\CustomerUserController;
 
 Route::get('/', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/signin', [AuthController::class, 'signin'])->name('admin.signin');
@@ -22,8 +23,14 @@ Route::group(['middleware'=>'admin_or_moderator.auth'], function () {
 
 
 Route::group(['middleware'=>'admin.auth'], function () {
-    Route::get('/add_user', [AuthController::class, 'addUser'])->name('admin.add_user');
-    Route::post('/add_user', [AuthController::class, 'saveUser'])->name('admin.save_add_user');
+    Route::group(['prefix'=>'add_user'], function () {
+        Route::get('/', [AuthController::class, 'addUser'])->name('admin.add_user');
+        Route::post('/', [AuthController::class, 'saveUser'])->name('admin.save_add_user');
+    });
+
+    Route::group(['prefix'=>'customer'], function () {
+        Route::get('/', [CustomerUserController::class, 'index'])->name('admin.customer');
+    });
 });
 
 Route::group(['prefix'=>'profile','middleware'=>'admin_or_moderator.auth'], function () {

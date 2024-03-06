@@ -14,12 +14,12 @@ class OrderStatusSeeder extends Seeder
     public function run(): void
     {
         $datas = [
-            ['name' => 'accepted', 'order_by' => 1],
-            ['name' => 'making', 'order_by' => 2],
-            ['name' => 'delivering', 'order_by' => 3],
-            ['name' => 'done', 'order_by' => 4],
+            ['name' => 'accepted', 'sequence' => 1],
+            ['name' => 'making', 'sequence' => 2],
+            ['name' => 'delivering', 'sequence' => 3],
+            ['name' => 'done', 'sequence' => 4],
         ];
 
-        OrderStatus::insert($datas); 
+        OrderStatus::insert($datas);
     }
 }

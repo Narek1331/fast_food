@@ -33,13 +33,13 @@ class CategoryLanguagesRequest extends FormRequest
         $languages = $this->language_serv->getAll();
 
         $validateArr = [
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
+            'image' => 'nullable|image|max:30480',
         ];
 
         foreach($languages as $lang){
             $validateArr[$lang->name] = 'required|string|max:250';
         }
-        
+
         return $validateArr;
     }
 }

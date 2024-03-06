@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', __('main.Products'))
+@section('title', __('main.List Ingredients'))
 
 @section('content')
 <br>

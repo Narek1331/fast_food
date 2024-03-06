@@ -12,14 +12,14 @@
                         <h1 class="mb-5 display-3 text-primary">
                             {{ __('main.Quality service') }}
                         </h1>
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="{{ __('main.Search') }}">
+                        <form class="position-relative mx-auto" method="GET" action="{{ route('food.index',['locale'=>app()->getLocale()]) }}">
+                            <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text" placeholder="{{ __('main.Search') }}" name="q">
                             <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">
                                 {{ __('main.Find') }}
                             </button>
-                        </div>
+                        </form>
                     </div>
-                  
+
                 </div>
             </div>
         </div>
@@ -32,8 +32,8 @@
                 <div class="row g-4">
                     @foreach ($categories as $category)
                     <div class="col-md-4 col-sm-6 mb-grid-gutter">
-                        <a class="card border-0 shadow" href="food-delivery-category.html">
-                            <img class="card-img-top" src="{{ $category->img_path }}" alt="Noodles">
+                        <a class="card border-0 shadow" href="{{ route('food.by_category',['locale'=>app()->getLocale(),'category_id'=>$category->id]) }}">
+                            <img class="card-img-top" src="{{ $category->img_path }}" alt="Noodles" height="350" style="background-size: cover!important;">
                             <div class="card-body py-4 text-center">
                             <h3 class="h5 mt-1">{{ $category->translate->name }}</h3>
                             </div>

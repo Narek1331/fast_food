@@ -15,4 +15,5 @@ return [
     'delivery'  => 'Առաքում',
     'states'  => 'Մարզեր',
     'settlements'  => 'Բնակավայրեր',
+    'customers'  => 'Հաճախորդներ',
 ];

@@ -32,11 +32,16 @@
                                                 {{ __('main.Categories') }}
                                             </h4>
                                             <ul class="list-unstyled fruite-categorie">
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a class="@if(request()->segment(3) == null) text-secondary @endif" href="{{ route('food.index',['locale'=>app()->getLocale()]) }}"><i class="fas fa-hamburger me-2"></i>{{ __('main.All') }}</a>
+                                                    </div>
+                                                </li>
                                                 @foreach ($categories as $category)
 
                                                     <li>
                                                         <div class="d-flex justify-content-between fruite-name">
-                                                            <a href=""><i class="fas fa-hamburger me-2"></i>{{ $category->name }}</a>
+                                                            <a class="@if(request()->segment(3) && $category->id == request()->segment(3)) text-secondary @endif" href="{{ route('food.by_category',['locale'=>app()->getLocale(),'category_id'=>$category->id]) }}"><i class="fas fa-hamburger me-2"></i>{{ $category->name }}</a>
                                                         </div>
                                                     </li>
                                                 @endforeach
@@ -129,7 +134,7 @@
                                         </form>
                                     @endforeach
 
-                                    <div class="col-12">
+                                    {{-- <div class="col-12">
                                         <div class="pagination d-flex justify-content-center mt-5">
                                             <a href="#" class="rounded">&laquo;</a>
                                             <a href="#" class="active rounded">1</a>
@@ -140,7 +145,7 @@
                                             <a href="#" class="rounded">6</a>
                                             <a href="#" class="rounded">&raquo;</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

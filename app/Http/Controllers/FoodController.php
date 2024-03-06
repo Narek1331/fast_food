@@ -16,10 +16,20 @@ class FoodController extends Controller
         $this->product_service = $product_service;
     }
 
-    public function index(){
+    public function index(Request $request){
+        $params = [];
+
+        if($request->segment(3)){
+            $params['category_id'] = $request->segment(3);
+        }
+
+        if(isset($request->q)){
+            $params['q'] = $request->q;
+        }
+
         $categories = $this->category_service->getAll();
-        $products = $this->product_service->paginateAll();
-        // dd($products);
+        $products = $this->product_service->paginateAll($params);
+
         return view('main.shop.index',[
             'categories' => $categories,
             'products' => $products

@@ -5,6 +5,20 @@
 @section('adminlte_css')
     @stack('css')
     @yield('css')
+    <style>
+        #example2_wrapper {
+            width: 100%;
+        }
+
+        #example2 {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-body {
+            overflow-x: auto; /* To enable horizontal scrolling if needed */
+        }
+    </style>
 @stop
 
 @section('classes_body', $layoutHelper->makeBodyClasses())

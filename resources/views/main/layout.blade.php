@@ -55,10 +55,10 @@
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
                     <a href="{{ route('home',['locale'=>app()->getLocale()]) }}" class="navbar-brand"><h1 class="text-primary display-6">Fast Food</h1></a>
-                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <button class="navbar-toggler py-2 px-3" type="button" onclick="toggleNavbar()">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                    <div class="navbar-collapse bg-white collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="{{ route('home',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">{{__('main.Home')}}</a>
                             <a href="{{ route('food.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'food.index' ? 'active' : '' }}">{{__('main.Food')}}</a>
@@ -88,6 +88,36 @@
 
                         </div>
                     </div>
+                    {{-- <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto">
+                            <a href="{{ route('home',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">{{__('main.Home')}}</a>
+                            <a href="{{ route('food.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'food.index' ? 'active' : '' }}">{{__('main.Food')}}</a>
+                            <a href="{{ route('contact.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'contact.index' ? 'active' : '' }}">{{__('main.Contact')}}</a>
+                        </div>
+                        <div class="d-flex m-3 me-0">
+                            <a href="{{ route('basket.index',['locale'=>app()->getLocale()]) }}" class="position-relative me-4 my-auto">
+                                <i class="fas fa-shopping-cart fa-2x"></i>
+                                    @if (auth()->check())
+                                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
+                                            {{auth()->user()->baskets()->count()}}
+                                        </span>
+                                    @endif
+                            </a>
+                            <a href="{{ route('order.my',['locale'=>app()->getLocale()]) }}" class="position-relative me-4 my-auto">
+                                <i class="fas fa-shipping-fast fa-2x "></i>
+                            </a>
+                            @if (auth()->check())
+                                <a href="{{ route('auth.logout',['locale'=>app()->getLocale()]) }}" class="my-auto">
+                                    <i class="fas fa-sign-out fa-2x"></i>
+                                </a>
+                            @else
+                                <a href="{{ route('auth.login',['locale'=>app()->getLocale()]) }}" class="my-auto">
+                                    <i class="fas fa-user fa-2x"></i>
+                                </a>
+                            @endif
+
+                        </div>
+                    </div> --}}
                 </nav>
             </div>
         </div>
@@ -206,7 +236,18 @@
     <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
+    <script>
+        function toggleNavbar() {
+            var navbarCollapse = document.getElementById("navbarCollapse");
+            if (navbarCollapse.classList.contains("show")) {
+                navbarCollapse.classList.remove("show");
+            } else {
+                navbarCollapse.classList.add("show");
+            }
+        }
+    </script>
     <script src="/js/main.js"></script>
+
     </body>
 
 </html>

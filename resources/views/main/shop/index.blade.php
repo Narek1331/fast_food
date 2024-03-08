@@ -1,6 +1,6 @@
 @extends('main.layout')
 
-@section('title', 'Page Title')
+@section('title', __('main.Food'))
 
 @section('content')
         <!-- Single Page Header start -->

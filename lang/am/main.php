@@ -55,6 +55,7 @@ return [
     'password' => 'Գաղտնաբառ',
     'Select role' => 'Ընտրեք դերը',
     'admin' => 'ադմին',
+    'admin panel' => 'Ադմինիստրատորի վահանակ',
     'moderator' => 'մոդերատոր',
     'customer' => 'հաճախորդ',
     'Add user' => 'Ավելացնել օգտվող',
@@ -147,5 +148,8 @@ return [
     'Order has ended, status cannot be changed' => 'Պատվերն ավարտվել է, կարգավիճակը հնարավոր չէ փոխել',
     'Customers' => 'Հաճախորդները',
     'All' => 'Բոլորը',
-
+    'Page Not Found' => 'Էջը չի գտնվել',
+    'Go Back To Home' => 'Վերադառնալ Գլխավոր էջ',
+    'We’re sorry, the page you have looked for does not exist in our website! Maybe go to our home page or try to use a search?' => 'Ցավում ենք, ձեր փնտրած էջը գոյություն չունի մեր կայքում: Միգուցե գնալ մեր գլխավոր էջ կամ փորձել օգտագործել որոնումը:',
+    'Welcome to this admin panel' => 'Բարի գալուստ ադմինիստրատորի վահանակ',
 ];

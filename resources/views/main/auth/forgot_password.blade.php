@@ -8,7 +8,7 @@
  <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">{{ __('main.forgot_password') }}</h1>
     <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="/">{{ __('main.Home') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('home',['locale'=>app()->getLocale()]) }}">{{ __('main.Home') }}</a></li>
         <li class="breadcrumb-item active text-white">{{ __('main.forgot_password') }}</li>
     </ol>
 </div>

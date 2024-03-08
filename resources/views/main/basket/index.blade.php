@@ -7,7 +7,7 @@
      <div class="container-fluid page-header py-5">
             <h1 class="text-center text-white display-6">{{ __('main.Basket') }}</h1>
             <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a href="/">{{ __('main.Home') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home',['locale'=>app()->getLocale()]) }}">{{ __('main.Home') }}</a></li>
                 <li class="breadcrumb-item active text-white">{{ __('main.Basket') }}</li>
             </ol>
         </div>

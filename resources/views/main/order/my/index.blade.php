@@ -8,7 +8,7 @@
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">{{__('main.My Orders')}}</h1>
     <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="/">{{__('main.Home')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('home',['locale'=>app()->getLocale()]) }}">{{__('main.Home')}}</a></li>
         <li class="breadcrumb-item active text-white">{{__('main.My Orders')}}</li>
     </ol>
 </div>
@@ -69,7 +69,7 @@
                             @if($order_product['ingredient_names'])
                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                             <p class="text-muted mb-0 small">
-                              {{__('main.Ingredients')}}: 
+                              {{__('main.Ingredients')}}:
                               {{$order_product['ingredient_names'] ?? '-'}}
                             </p>
                             </div>
@@ -80,14 +80,14 @@
                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                             <p class="text-muted mb-0 small">{{__('main.Total')}}: {{$order_product['total_price']}}</p>
                             </div>
-                           
+
                         </div>
-                        
+
                         </div>
                     </div>
                 @endforeach
-              
-  
+
+
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">{{__('main.Order Number')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['order_number']}}</p>
@@ -102,27 +102,27 @@
                 <p class="fw-bold mb-0">{{__('main.email')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['email']}}</p>
               </div>
-              
+
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">{{__('main.Phone Number')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['phone_number']}}</p>
               </div>
-              
+
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">{{__('main.State')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['state'] ?? null}}</p>
               </div>
-              
+
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">{{__('main.Settlement')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['settlement'] ?? null}}</p>
               </div>
-              
+
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">{{__('main.Address')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['address']}}</p>
               </div>
-              
+
               <div class="d-flex justify-content-between pt-2">
                 <p class="fw-bold mb-0">{{__('main.Payment method')}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['payment_method_name']}}</p>
@@ -138,7 +138,7 @@
                 <p class="text-muted mb-0"><span class="fw-bold me-4"></span>{{$order['order']['date']}}</p>
               </div>
 
-            
+
               <br>
               <div class="" style="width:100%!important">
                 <div class="mb-3">
@@ -148,12 +148,12 @@
                   </textarea>
                 </div>
               </div>
-              
-              
-              
+
+
+
               <div class="container py-5">
                 <div class="row">
-              
+
                   <div class="col-md-12 col-lg-12">
                     <div id="tracking-pre"></div>
                     <div id="tracking">
@@ -166,7 +166,7 @@
                               <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                           </div>
-                          
+
                           <div class="tracking-content">
                             {{__('main.' . $order_status->name)}}
                             <span></span>
@@ -209,7 +209,7 @@
                           <div class="tracking-date"><img src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg" class="img-responsive" alt="order-placed" /></div>
                           <div class="tracking-content">Near by Courier facility<span>10 Aug 2025, 03:00pm</span></div>
                         </div>
-              
+
                         <div class="tracking-item-pending">
                           <div class="tracking-icon status-intransit">
                             <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
@@ -233,17 +233,17 @@
                   </div>
                 </div>
               </div>
-                
+
               </div>
 
 
             </div>
-            
+
             <div class="card-footer border-0 px-4 py-5 bg-secondary"
               style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 
               <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
-                {{__('main.Total cost with delivery')}}: 
+                {{__('main.Total cost with delivery')}}:
                 <span class="h2 mb-0 ms-2">
                   {{formatPrice(config('delivery.price') + $order['order']['total_order_products_price'])}} ֏
                 </span>

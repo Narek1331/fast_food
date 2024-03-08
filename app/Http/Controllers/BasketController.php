@@ -14,7 +14,7 @@ class BasketController extends Controller
 
     public function store(BasketStoreRequest $request){
         $this->basket_serv->store($request->validated());
-        return redirect()->back();
+        return redirect()->back()->with('basket_message', trans('messages.add_basket'));
     }
 
     public function index(){

@@ -3,6 +3,7 @@
 @section('title', __('main.Food'))
 
 @section('content')
+
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
             <h1 class="text-center text-white display-6">{{ __('main.Food') }}</h1>
@@ -15,7 +16,7 @@
 
 
         <!-- Fruits Shop Start-->
-        <div class="container-fluid fruite py-5">
+        <div class="container-fluid fruite py-5" onclick="hideAlert()">
             <div class="container py-5">
                 {{-- <h1 class="mb-4">
                     {{ __('main.Fresh foods') }}
@@ -152,12 +153,41 @@
                     </div>
                 </div>
             </div>
+            @if(session('basket_message'))
+
+                <div id="basketAlertContainer"  class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="z-index: 100; background-color: rgba(255, 255, 255, 0.5);" role="alert">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <!-- Close button -->
+                            {{-- <button type="button" class="btn-close" aria-label="Close" onclick="hideAlert()"></button> --}}
+
+                            <p class="card-text text-dark">
+                                {{ session('basket_message') }}
+                            </p>
+                            <a href="{{ route('basket.index',['locale'=>app()->getLocale()]) }}" class="card-link">
+                                {{ __('main.Go to basket page') }}
+                            </a>
+                            <a href="#" onclick="hideAlert()" class="card-link">{{ __('main.Continue') }}</a>
+                        </div>
+                    </div>
+
+                </div>
+            @endif
+
         </div>
         <!-- Fruits Shop End-->
+
+
         @endsection
 
         @section('js')
             <script>
+                function hideAlert() {
+                    let alertContainer = document.getElementById('basketAlertContainer');
+                    if(alertContainer){
+                        alertContainer.remove();
+                    }
+                }
 
                 function decrementButton(num) {
                     let quantityInput = document.getElementById('quantityInput_' + num);
@@ -225,5 +255,8 @@
                     contentBtn.classList.remove("d-none");
                     }
                 }
+
+
             </script>
+
         @endsection

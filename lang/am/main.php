@@ -152,4 +152,8 @@ return [
     'Go Back To Home' => 'Վերադառնալ Գլխավոր էջ',
     'We’re sorry, the page you have looked for does not exist in our website! Maybe go to our home page or try to use a search?' => 'Ցավում ենք, ձեր փնտրած էջը գոյություն չունի մեր կայքում: Միգուցե գնալ մեր գլխավոր էջ կամ փորձել օգտագործել որոնումը:',
     'Welcome to this admin panel' => 'Բարի գալուստ ադմինիստրատորի վահանակ',
+    'Go to basket page' => 'Գնալ զամբյուղի էջ',
+    'Continue' => 'Շարունակել',
+
+
 ];

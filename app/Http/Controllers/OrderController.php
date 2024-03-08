@@ -9,6 +9,7 @@ use App\Services\PaymentMethodService;
 use App\Services\OrderStatusService;
 use App\Services\OrderService;
 use App\Http\Requests\StoreOrderRequest;
+use App\Events\NewOrderEvent;
 
 class OrderController extends Controller
 {
@@ -40,6 +41,7 @@ class OrderController extends Controller
 
     public function store(StoreOrderRequest $request){
         $order = $this->order_serv->store($request->validated());
+        event(new NewOrderEvent($order));
         return redirect()->route('order.my', ['locale' => app()->getLocale()])->with('message', trans('messages.order_stored_successfully'));
     }
 

@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Language;
 
-class LanguageRepository{
-
+class LanguageRepository
+{
     /**
      * Get all languages.
      *
@@ -16,4 +16,13 @@ class LanguageRepository{
         return Language::get();
     }
 
+    /**
+     * Get only language names.
+     *
+     * @return \Illuminate\Support\Collection The collection of language names
+     */
+    public function getOnlyNames()
+    {
+        return Language::pluck('name');
+    }
 }

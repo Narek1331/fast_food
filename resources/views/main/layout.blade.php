@@ -64,6 +64,18 @@
                             <a href="{{ route('food.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'food.index' ? 'active' : '' }}">{{__('main.Food')}}</a>
                             <a href="{{ route('contact.index',['locale'=>app()->getLocale()]) }}" class="nav-item nav-link {{ Route::currentRouteName() == 'contact.index' ? 'active' : '' }}">{{__('main.Contact')}}</a>
                         </div>
+                        <form action="{{ route('locale.change') }}" method="GET" class="form-inline">
+                            @csrf
+                            <div class="form-group">
+                                <select class="form-control selectpicker" data-width="fit" onchange="this.form.submit()" name="lang">
+                                    @foreach ($languages as $language)
+                                        <option value="{{ $language['name'] }}" @if(app()->getLocale() == $language['name']) selected @endif>
+                                            {{ __('main.' . $language['name']) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
                         <div class="d-flex m-3 me-0">
                             <a href="{{ route('basket.index',['locale'=>app()->getLocale()]) }}" class="position-relative me-4 my-auto">
                                 <i class="fas fa-shopping-cart fa-2x"></i>

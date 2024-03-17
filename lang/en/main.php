@@ -29,7 +29,7 @@ return [
     'Enter the name' => 'Enter the name',
     'Enter the description' => 'Enter the description',
     'Select the category' => 'Select the category',
-    'am' => 'English',
+    'am' => 'Armenian',
     'ru' => 'Russian',
     'en' => 'English',
     'eng' => 'English',

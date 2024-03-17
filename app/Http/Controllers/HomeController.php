@@ -4,66 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\CategoryService;
+use App\Services\LanguageService;
 
 class HomeController extends Controller
 {
+    protected $category_service;
+    protected $lang_service;
+
     /**
      * Create a new controller instance.
      *
+     * @param  \App\Services\CategoryService  $category_service
+     * @param  \App\Services\LanguageService  $lang_service
      * @return void
      */
     public function __construct(
-        CategoryService $category_service
+        CategoryService $category_service,
+        LanguageService $lang_service
     )
     {
         $this->category_service = $category_service;
+        $this->lang_service = $lang_service;
     }
 
     /**
-     * Show the application dashboard.
+     * Display the home page.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\View\View The home page view
      */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
-
-    public function checkout(){
-        return view('main.checkout');
-    }
-
-    public function contact(){
-        return view('main.contact');
-    }
-
-    public function testimonial(){
-        return view('main.testimonial');
-    }
-
-    public function basket(){
-        return view('main.basket.index');
-    }
-
-    public function notFound(){
-        return view('main.not_found');
-    }
-
-    public function index(){
+    public function index()
+    {
+        // Retrieve all categories
         $categories = $this->category_service->getAll();
-        
-        return view('main.home',[
-            'categories' => $categories
+
+        // Retrieve all languages
+        $languages = $this->lang_service->getAll();
+
+        // Pass categories and languages to the view
+        return view('main.home', [
+            'categories' => $categories,
+            'languages' => $languages
         ]);
     }
-
-    public function shop(){
-        return view('main.shop.index');
-    }
-
-    public function shopSingle(){
-        return view('main.shop.show');
-    }
-
-
 }

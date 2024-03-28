@@ -67,10 +67,12 @@
                         <form action="{{ route('locale.change') }}" method="GET" class="form-inline">
                             @csrf
                             <div class="form-group">
+                                {{-- @dd(config('app.languages')) --}}
+
                                 <select class="form-control selectpicker" data-width="fit" onchange="this.form.submit()" name="lang">
-                                    @foreach ($languages as $language)
-                                        <option value="{{ $language['name'] }}" @if(app()->getLocale() == $language['name']) selected @endif>
-                                            {{ __('main.' . $language['name']) }}
+                                    @foreach (config('app.languages') as $language => $langKey)
+                                        <option value="{{ $language }}" @if(app()->getLocale() == $language) selected @endif>
+                                            {{ __('main.' . $language) }}
                                         </option>
                                     @endforeach
                                 </select>
